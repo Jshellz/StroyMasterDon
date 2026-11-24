@@ -19,9 +19,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY pyproject.toml uv.lock /app/
 RUN uv sync --frozen --no-install-project --no-dev
 
-# Copy project code
 COPY . /app/
 
-EXPOSE 8000
+RUN chmod +x /app/entrypoint.sh
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["/app/entrypoint.sh"]
+

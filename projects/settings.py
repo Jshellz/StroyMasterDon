@@ -19,7 +19,13 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '0.0.0.0',
     'localhost',
+    'smd.com',
+    '://smd.com',
 ]
+
+CSRF_TRUSTED_ORIGINS = 'https://smd.com', 'https://://smd.com'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
@@ -120,6 +126,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Email
