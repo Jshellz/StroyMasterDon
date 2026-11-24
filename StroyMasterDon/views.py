@@ -2,6 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Order
 
+def base(request):
+    return render(request, template_name="base.html")
+
+def dashboard(request):
+    return render(request, template_name="dashboard/dashboard.html")
+
+
 @login_required
 def order_list(request):
     orders = Order.objects.all().select_related('client', 'manager').order_by('-created_at')

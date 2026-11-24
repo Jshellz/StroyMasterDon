@@ -1,0 +1,52 @@
+/* ================= БЛОК «ОСТАТОК» ================= */
+.stock-block {
+    background: #f0f6ff;
+    border-color: #d7e4ff;
+}
+
+.stock-value {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.stock-number {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #1a4fcc;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.stock-in-input {
+    width: 110px;
+    text-align: center;
+    border-radius: 20px !important;
+}
+
+/* ================= МОДАЛЬНОЕ ОКНО ТОВАРА ================= */
+#productModal .form-label {
+    margin-bottom: 0.3rem;
+}
+
+#productModal .form-control,
+#productModal .form-select {
+    border-radius: 14px;
+    font-size: 0.9rem;
+}
+
+#productModal textarea.form-control {
+    border-radius: 14px;
+    resize: vertical;
+}
+
+/* Подсказка «товар добавлен в заказ» — иконка карандаша в подсказках */
+.product-suggestion-item .ps-edit-hint {
+    color: #8a99b0;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+.product-suggestion-item:hover .ps-edit-hint {
+    opacity: 1;
+}

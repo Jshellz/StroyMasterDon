@@ -1,34 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель заказов — Bootstrap 5</title>
+    <title>{% block title %}СтройМастерДон{% endblock %}</title>
 
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Собственные стили -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
+{% block header %}
 <header class="topbar py-3">
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                <!-- Логотип -->
                 <div class="d-flex align-items-center gap-2">
                     <div class="logo-icon">
                         <i class="bi bi-box"></i>
                     </div>
-                    <span class="logo-text">StroyMasterDon</span>
+                    <span class="logo-text">СтройМастерДон</span>
                 </div>
-
-                <!-- Пользователь + выход -->
                 <div class="d-flex align-items-center gap-3">
                     <div class="user-badge d-flex align-items-center gap-2">
-                        <div class="avatar">АК</div>
-                        <span class="fw-semibold text-dark small">Алексей Ковалёв</span>
+                        <div class="avatar">МИ</div>
+                        <span class="fw-semibold text-dark small">Мария Иванова</span>
                     </div>
                     <button class="btn btn-outline-secondary rounded-pill px-3 d-flex align-items-center gap-2 fw-semibold small">
                         <i class="bi bi-box-arrow-right"></i>
@@ -37,10 +33,71 @@
                 </div>
             </div>
         </div>
-    </header>
+</header>
+{% endblock %}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">
+                <strong>СтройМастерДон</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Панель управления</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'orders' %}">Заказы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Клиенты</a>
+                    </li>
+                    {% if user.profile.role == 'admin' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Отчеты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Администрирование</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            {{ user.get_full_name|default:user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="">Выход</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
-<!-- Bootstrap 5 JS -->
+
+<main class="container mt-4">
+        {% block content %}{% endblock %}
+</main>
+
+{% block footer %}
+    <footer class="bg-light text-center text-lg-start mt-5 py-3">
+        <div class="container">
+            <p class="text-muted mb-0">&copy; 2026 My Site. Система автоматизации заказов</p>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Собственный скрипт -->
-    <script src="script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+</body>
 </html>
